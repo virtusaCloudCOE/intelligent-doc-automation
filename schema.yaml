@@ -1,0 +1,25 @@
+applicationApiVersion: v1beta1
+
+properties:
+  imageTradefinance.image:
+    type: string
+    default: gcr.io/coe-marketplace-215839-public/intelligent-doc-automation:2.0
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: imageTradefinance.repository
+            after: imageTradefinance.tag
+  name:
+    type: string
+    x-google-marketplace:
+      type: NAME
+  namespace:
+    type: string
+    x-google-marketplace:
+      type: NAMESPACE
+required:
+- name
+- namespace
+- imageTradefinance.image
