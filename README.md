@@ -98,7 +98,6 @@ Deploy tradefinance to Google Kubernetes Engine using Google Cloud Marketplace, 
 You'll need the following tools in your development environment. If you are using Cloud Shell, then gcloud, kubectl, Docker, and Git are installed in your environment by default.
 
 * [gcloud](https://cloud.google.com/sdk/gcloud/)
-* [mpdev](https://github.com/GoogleCloudPlatform/marketplace-k8s-app-tools/blob/master/docs/mpdev-references.md)
 * [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/)
 * [docker](https://docs.docker.com/install/)
 * [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
