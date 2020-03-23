@@ -2,7 +2,7 @@
 # Deploying intelligent-doc-automation app to GKE via Google Cloud Marketplace
 
 ## Overview
-Intelligent-doc-automation is an application for document automation, i.e. extraction of entities from digital documents. There are two parts of this application. 1. Trade Finance and 2. Margin Call
+Intelligent Document Automation is an application for document automation, i.e. extraction of entities from digital documents. There are two parts of this application. 1. Trade Finance and 2. Margin Call
 
 
 ##### Trade Finance API
