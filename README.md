@@ -52,6 +52,7 @@ Deploy tradefinance to Google Kubernetes Engine using Google Cloud Marketplace, 
 You'll need the following tools in your development environment. If you are using Cloud Shell, then gcloud, kubectl, Docker, and Git are installed in your environment by default.
 
 * [gcloud](https://cloud.google.com/sdk/gcloud/)
+* [mpdev](https://github.com/GoogleCloudPlatform/marketplace-k8s-app-tools/blob/master/docs/mpdev-references.md)
 * [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/)
 * [docker](https://docs.docker.com/install/)
 * [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
@@ -68,8 +69,8 @@ gcloud auth configure-docker
 Create a new cluster from the command line:
 
 ```bash
-export CLUSTER=cert-manager-cluster
-export ZONE=us-west1-a
+export CLUSTER=ida-cluster
+export ZONE=us-central1-a
 
 gcloud container clusters create "${CLUSTER}" --zone "${ZONE}"
 ```
@@ -84,7 +85,7 @@ gcloud container clusters get-credentials "${CLUSTER}" --zone "${ZONE}"
 Clone this repo and its associated tools repo:
 
 ```bash
-git clone --recursive https://github.com/abhinav-vir/tradefinance.git
+git clone --recursive https://github.com/virtusaCloudCOE/intelligent-doc-automation.git
 ```
 
 ##### Install the Application resource definition
@@ -103,28 +104,14 @@ The Application resource is defined by the [Kubernetes SIG-apps](https://github.
 
 #### Install the app
 
-Navigate to the ```cert-manager``` directory:
 
 ##### Configure the app with environment variables
 
 Choose an instance name and [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) for the app. In most cases, you can use the ```default``` namespace.
 
 ```bash 
-export APP_INSTANCE_NAME=tradefinance-1
-export NAMESPACE=tf-app-namespace
-```
-
-Configure the container image:
-```bash
-export TAG=0.2
-export IMAGE_CONTROLLER="marketplace.gcr.io/virtusa-corporation/tradefinance"
-```
-By default 1 replica for each deployment, but optionally you can set the number of replicas for Cert Manager controller, webhook and cainjector.
-
-```bash
-export CONTROLLER_REPLICAS=3
-export WEBHOOK_REPLICAS=3
-export CAINJECTOR_REPLICAS=3
+export APP_INSTANCE_NAME=ida-1
+export NAMESPACE=ida-app-namespace
 ```
 
 ##### Create namespace in your Kubernetes cluster
@@ -134,3 +121,4 @@ If you use a different namespace than the ```default```, run the command below t
 ```bash
 kubectl create namespace "${NAMESPACE}"
 ````
+
