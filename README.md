@@ -1,9 +1,19 @@
 
-# Deploying tradefinance app to GKE via Google Cloud Marketplace
+# Deploying intelligent-doc-automation app to GKE via Google Cloud Marketplace
 
 ## Overview
-TradeFinance is an application for document automation, i.e. extraction of entities from digital documents. This solution uses Neural Network LSTM based optical character recognition (OCR) followed by Entity Recognition (Natural Language Processing approach) whcih improves the efficiency of the process of searching key payment terms from documents.
+Intelligent-doc-automation is an application for document automation, i.e. extraction of entities from digital documents. There are two parts of this application. 1. Trade Finance and 2. Margin Call
 
+
+##### Trade Finance API
+This solution uses Neural Network LSTM based optical character recognition (OCR) followed by Entity Recognition (Natural Language Processing approach) whcih improves the efficiency of the process of searching key payment terms from documents.
+
+##### Margin Call API
+Emails related to margin calls made by the bank’s clients or responses to the bank originated calls at times included pdf or other attachments.
+
+As the first step, mails are classified as a margin call or otherwise using random forest based classification.
+
+NLP based entity recognition is used to identify the key terms related to the margin call.
 
 The 
 [Google Cloud Marketplace][1] 
@@ -18,9 +28,10 @@ cluster, with just a few clicks.
 #### Endpoints
 After application is deployed on kubernetes cluster an endpoint will be created(provided below) which the end user can use to extract the entities.
 
-##### ENDPOINT URL: 
+##### ENDPOINT URLs: 
  
 "http://IP_ADDRESS/intelligent-doc-automation/trade-finance/api/v1/document"
+"http://IP_ADDRESS/intelligent-doc-automation/margin-call/api/v1/document"
 
 ##### Steps to get the IP_ADDRESS
 Go to Kubernetes Engine on GCP Console -> click on Workloads from left pane -> look for the namespace you created when deploying from marketplace with Type "Deployment" -> look for endpoints under Exposing Services.
@@ -29,13 +40,48 @@ Go to Kubernetes Engine on GCP Console -> click on Workloads from left pane -> l
 POST
 
 ##### Required Parameters:
+  *trade-finance enddpoint only accepts pdf files as input and margin-call endpoint only accepts msg(MS outlook) format as input.
   | Name      | Value |
   | ----------- | ----------- |
   | file      | file should be passed here       |
 
 ##### Sample Output:
+###### trade-finance
 {'Destination Bank': 'THE BANK OF NEW YORK MELLON', 'Document Date': '12 JULY 2017', 'Destination Swift': 'IRVTUS3N', 'Issuing Bank': 'AUSTRALIA AND NEW ZEALAND BANKING GROUP LTD.', 'Beneficiary': 'SIAM PROTEINS CO. , LTD. .', 'Applicant': 'GIBSON LTD T/A SKRETTING AUSTRALIA', 'Destination Bank Location': 'NY 10286 UNITED STATES OF AMERICA'}
 
+###### margin-call
+{
+  "attachment_content": [
+    "alecta",
+    "Regeringsgatan 107",
+    "103 73 Stockholm",
+    "Sweden",
+    "Phone: +46 8 441 68 30",
+    "Fax: +46 8 20 75 44",
+    "Email: BusinessSupport@alecta.com",
+    "Margin Call notice",
+    "Citigroup Global Markets Limited",
+    "Mail Drop CGC 05-66",
+    "33 Canada Square, Canary Wharf",
+    "London E14 SLB",
+    "United Kingdom",
+    "Phone. +44 207 986 4108",
+    "Facsimile: +44 207 192 3222",
+    "Email: OTCmargining@citi.com",
+    "Exposure date 2017-01—16",
+    "Figures in Base currency (EUR)",
+    "Exposure EUR 32 691 039",
+    "After Haircut Value of Collateral Pending —23 432 000",
+    "Credit Support amount 9 259 039",
+    "Credit Support amount (rounded) 9 260 000",
+    "Minimum Transfer Amount 2 500 000",
+    "Rounding Amount 10 000",
+    "Margin Call for Citigroup",
+    "EUR 9 260 000",
+    "Value date 2017-01—18"
+  ],
+  "margin_call": "Callout"
+}
 
 ## Installation
 
