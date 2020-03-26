@@ -166,4 +166,9 @@ If you use a different namespace than the ```default```, run the command below t
 ```bash
 kubectl create namespace "${NAMESPACE}"
 ````
+##### cd into cloned git directory
 
+```bash
+helm install $APP_INSTANCE_NAME ./chart/tradefinance --namespace $NAMESPACE 
+```
+Application should be visible on kubernetes applications in gcp console. Wait for some time till loadbalancer gets up and running.
